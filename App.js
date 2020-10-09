@@ -2,10 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import ExampleScreen from './app/screens/ExampleScreen';
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up JD.js to start working on your app!</Text>
+      <Text>Witam Serdeczne React Native JD</Text>
+      <ExampleScreen/>
       <StatusBar style="auto" />
     </View>
   );
