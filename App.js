@@ -7,7 +7,6 @@ import ExampleScreen from './app/screens/ExampleScreen';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Witam Serdeczne React Native JD</Text>
       <ExampleScreen/>
       <StatusBar style="auto" />
     </View>
@@ -16,9 +15,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 50
   },
 });
