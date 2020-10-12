@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Text, View, Button, FlatList, StyleSheet } from "react-native";
+
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+
 import KoksuItem from "../components/KoksuItem";
+import Colors from "../constants/colors";
 
 function ExampleScreen(props) {
   const [koksy, setKoksy] = useState([
@@ -18,30 +21,37 @@ function ExampleScreen(props) {
     { key: uuidv4(), name: "Ivan" },
   ]);
 
+  function deleteKoks(koksKey) {
+    setKoksy((currentKoksy) =>
+      currentKoksy.filter((item) => item.key !== koksKey)
+    );
+  }
+
   return (
     <View style={styles.screen}>
-      <Text style={[styles.title]}>Najwększe koksy</Text>
+      <Text style={[styles.title]}>Największe koksy</Text>
       <FlatList
         data={koksy}
-        renderItem={({ item }) => <KoksuItem koks={item} />}
+        renderItem={({ item }) => (
+          <KoksuItem koks={item} onDelete={deleteKoks} />
+        )}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        alignItems: "center",
-        marginBottom: 100
-    },
+  screen: {
+    alignItems: "center",
+  },
 
-    title: {
-        fontWeight: "bold",
-        fontSize: 34,
-        color: "mediumslateblue",
-        alignSelf:"center",
-        marginVertical: 20,
-    }    
-})
+  title: {
+    fontWeight: "bold",
+    fontSize: 34,
+    color: Colors.primary,
+    alignSelf: "center",
+    marginVertical: 20,
+  },
+});
 
 export default ExampleScreen;
