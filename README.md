@@ -8,7 +8,7 @@
 
 ### Installing dependencies
 ```sh
-cd HackHeroes2020
+cd MoodBuddy
 npm install expo
 npm install expo-cli
 ```
