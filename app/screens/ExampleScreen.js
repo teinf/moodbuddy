@@ -5,6 +5,7 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
 import KoksuItem from "../components/KoksuItem";
+import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
 
 function ExampleScreen(props) {
@@ -30,12 +31,6 @@ function ExampleScreen(props) {
   return (
     <View style={styles.screen}>
       <Text style={[styles.title]}>Największe koksy</Text>
-      <FlatList
-        data={koksy}
-        renderItem={({ item }) => (
-          <KoksuItem koks={item} onDelete={deleteKoks} />
-        )}
-      />
     </View>
   );
 }
