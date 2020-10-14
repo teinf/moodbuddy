@@ -15,26 +15,43 @@ LocaleConfig.locales['pl'] = {
 };
 LocaleConfig.defaultLocale = 'pl';
 
+var dateList = [];
+
 function CalendarScreen(props) {
+    
+
+    const [myMarkedDates, setMarkedDates] = useState({
+        '2020-10-16': {selected: true, marked: true, selectedColor: 'blue'}})
+
+
+    function MarkDay(day)
+    {
+        // var key = day.dateString;
+        // var json = { };
+        // myMarkedDates[key] = {selected: true, marked: true, selectedColor: 'blue'}
+        // setMarkedDates((currentMarkedDates) => currentMarkedDates[key] = {selected: true, marked: true, selectedColor: 'blue'})
+
+        // var key2 = "2020-10-10";
+        // json[key2] = {selected: true, marked: true, selectedColor: 'blue'}
+    }
+
     return (
         <View>
-          <CalendarList></CalendarList>
+            <CalendarList
+                onDayPress={(day) => {MarkDay(day)}}
+                firstDay={1}
+                horizontal={true}
+                pagingEnabled={true}
+                pastScrollRange={1000}
+                futureScrollRange={1000}
+                markedDates={myMarkedDates}
+            />
         </View>
       );
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    alignItems: "center",
-  },
 
-  title: {
-    fontWeight: "bold",
-    fontSize: 34,
-    color: Colors.primary,
-    alignSelf: "center",
-    marginVertical: 20,
-  },
 });
 
 export default CalendarScreen;
