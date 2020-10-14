@@ -1,38 +1,32 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
-import Card from "./Card";
-
-import Colors from "../constants/colors";
-
-function KoksuItem({ koks, onDelete }) {
+function KoksuItem({ koks }) {
   return (
-    <TouchableOpacity onPress={onDelete.bind(this, koks.key)}>
-      <Card style={styles.mainContainer}>
-        <Text style={[styles.itemName]}>{koks.name}</Text>
-        <Text style={[styles.itemKey]}>{koks.key}</Text>
-      </Card>
-    </TouchableOpacity>
+    <View style={[styles.mainContainer]}>
+      <Text style={[styles.itemName]}>{koks.name}</Text>
+      <Text style={[styles.itemKey]}>{koks.key}</Text>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   itemName: {
     fontWeight: "800",
-    color: "white",
-    fontSize: 22,
+    color: "white"
   },
-
   itemKey: {
-    color: Colors.light,
+      color: "#f6f6f6"
   },
 
   mainContainer: {
     flexDirection: "column",
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.2)",
     padding: 30,
     marginBottom: 15,
-    backgroundColor: Colors.primary,
-    width: "100%",
+    backgroundColor: "mediumslateblue",
+    width: "100%"
   },
 });
 
