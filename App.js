@@ -5,11 +5,12 @@ import Card from './app/components/Card';
 
 import ExampleScreen from './app/screens/ExampleScreen';
 import CalendarScreen from './app/screens/CalendarScreen';
+import FlatButton from './app/components/MoodButton';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <CalendarScreen/>
+      <ExampleScreen/>
     </View>
   );
 }
