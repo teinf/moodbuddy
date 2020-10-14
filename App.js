@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import MoodSlider from './app/components/MoodSlider';
 
+import ExampleScreen from './app/screens/ExampleScreen';
+import CalendarScreen from './app/screens/CalendarScreen';
+import FlatButton from './app/components/MoodButton';
 
 export default function App() {
   return (
