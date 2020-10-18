@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Platform } from "react-native";
 import Slider from "@react-native-community/slider";
 import { FontAwesome5 } from "@expo/vector-icons";
 
@@ -9,36 +9,46 @@ import Moods from "../constants/moods";
 import MoodEmojis from "../constants/moodEmojis";
 
 import Card from "./Card";
+import DateChanger from "./DateChanger";
 
 function MoodSlider(props) {
-  const [currentMood, setCurrentMood] = useState(0);
+  const [currentMood, setCurrentMood] = useState(2);
+  const [currentDate, setCurrentDate] = useState(Date.now())
 
   return (
     <View style={[styles.container]}>
-      <FontAwesome5
-        name={MoodEmojis[currentMood]}
-        size={64}
-        color={MoodColors[currentMood]}
-      />
-      <Slider
-        style={[styles.slider]}
-        minimumValue={0}
-        maximumValue={4}
-        value={2}
-        minimumTrackTintColor={MoodColors[currentMood]}
-        // maximumTrackTintColor={MoodColors[currentMood]}
-        thumbTintColor={MoodColors[currentMood]}
-        onValueChange={(value) => setCurrentMood(Math.round(value))}
-      ></Slider>
-      <Text style={[styles.moodText]}>{Moods[currentMood]}</Text>
+      <Card style={styles.card}>
+        <FontAwesome5
+          name={MoodEmojis[currentMood]}
+          size={64}
+          color={MoodColors[currentMood]}
+        />
+        <DateChanger date={currentDate}/>
+        <Slider
+          style={[styles.slider]}
+          minimumValue={0}
+          maximumValue={4}
+          value={2}
+          minimumTrackTintColor={MoodColors[currentMood]}
+          thumbTintColor={MoodColors[currentMood]}
+          onValueChange={(value) => setCurrentMood(Math.round(value))}
+        ></Slider>
+        <Text style={[styles.moodText]}>{Moods[currentMood]}</Text>
+      </Card>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: "center",
+    padding: 20,
+  },
+  card: {
     width: "100%",
     alignItems: "center",
+    padding: 30,
+    backgroundColor: "white",
   },
 
   slider: {

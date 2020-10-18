@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Project",
-    "slug": "Project",
+    "name": "MoodBuddy",
+    "slug": "moodbuddy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/kamil-koziol/MoodBuddy"
   }
 }
