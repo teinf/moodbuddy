@@ -12,7 +12,8 @@ import Card from "./Card";
 import DateChanger from "./DateChanger";
 
 function MoodSlider(props) {
-  const [currentMood, setCurrentMood] = useState(2);
+  const STARTING_MOOD = 3
+  const [currentMood, setCurrentMood] = useState(STARTING_MOOD);
   const [currentDate, setCurrentDate] = useState(Date.now())
 
   return (
@@ -28,7 +29,7 @@ function MoodSlider(props) {
           style={[styles.slider]}
           minimumValue={0}
           maximumValue={4}
-          value={2}
+          value={STARTING_MOOD}
           minimumTrackTintColor={MoodColors[currentMood]}
           thumbTintColor={MoodColors[currentMood]}
           onValueChange={(value) => setCurrentMood(Math.round(value))}
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     padding: 30,
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
 
   slider: {

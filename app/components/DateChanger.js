@@ -25,6 +25,7 @@ function DateChanger({ date }) {
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={showPicker}
+        date={currentDate}
         mode="date"
         onConfirm={(value) => {setCurrentDate(value); setShowPicker(false)}}
         onCancel={() => setShowPicker(false)}
