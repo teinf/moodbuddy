@@ -55,6 +55,12 @@ async function data(){
   return (
     <View style={styles.screen}>
       <Text style={[styles.title]}>Największe koksy</Text>
+      <FlatList
+        data={koksy}
+        renderItem={({ item }) => (
+          <KoksuItem koks={item} onDelete={deleteKoks} />
+        )}
+      />
     </View>
   );
 }
