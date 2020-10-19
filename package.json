@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
-    "@react-native-community/datetimepicker": "^3.0.4",
+    "@react-native-community/datetimepicker": "^3.0.0",
     "@react-native-community/slider": "^3.0.3",
     "@react-navigation/native": "^5.7.6",
     "expo": "^39.0.3",

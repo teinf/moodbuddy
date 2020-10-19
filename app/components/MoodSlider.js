@@ -24,7 +24,7 @@ function MoodSlider(props) {
           size={64}
           color={MoodColors[currentMood]}
         />
-        <DateChanger date={currentDate}/>
+        <Text style={[styles.moodText]}>{Moods[currentMood]}</Text>
         <Slider
           style={[styles.slider]}
           minimumValue={0}
@@ -34,7 +34,7 @@ function MoodSlider(props) {
           thumbTintColor={MoodColors[currentMood]}
           onValueChange={(value) => setCurrentMood(Math.round(value))}
         ></Slider>
-        <Text style={[styles.moodText]}>{Moods[currentMood]}</Text>
+        <DateChanger date={currentDate} style={styles.dateChanger} />
       </Card>
     </View>
   );
@@ -54,12 +54,17 @@ const styles = StyleSheet.create({
 
   slider: {
     width: "75%",
-    marginVertical: 20,
+    marginVertical: 5,
   },
 
   moodText: {
     fontSize: 16,
+    marginTop: 15
   },
+  
+  dateChanger: {
+    marginTop: 20
+  }
 });
 
 export default MoodSlider;

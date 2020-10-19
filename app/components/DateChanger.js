@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Card from "./Card";
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import Colors from "../constants/colors"
+import { FontAwesome } from '@expo/vector-icons'; 
 
 function formatDate(date) {
   var d = new Date(date),
@@ -12,16 +14,19 @@ function formatDate(date) {
 
   if (month.length < 2) month = "0" + month;
   if (day.length < 2) day = "0" + day;
-  return [day, month, year].join("-");
+  return [day, month, year].join(".");
 }
 
-function DateChanger({ date }) {
+function DateChanger({ date, style }) {
   const [currentDate, setCurrentDate] = useState(date);
   const [showPicker, setShowPicker] = useState(false);
   return (
-    <View>
+    <View style={style}>
       <TouchableOpacity onPress={() => setShowPicker(true)} style={styles.container}>
+        <Card style={styles.main}>
           <Text style={styles.dateText}>{formatDate(currentDate)}</Text>
+          <FontAwesome name="calendar" size={18} color="black" />
+        </Card>
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={showPicker}
@@ -41,10 +46,17 @@ function DateChanger({ date }) {
 
 const styles = StyleSheet.create({
   dateText: {
-    textDecorationLine: "underline",
+    borderRightColor: Colors.dark,
+    borderRightWidth: 2,
+    marginRight: 5,
   },
-  container: {
-    marginTop: 20
+  main: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignContent: "space-between",
+    padding: 10,
+
+    backgroundColor: Colors.light
   }
 });
 
