@@ -32,6 +32,8 @@ function DateChanger({ date }) {
         cancelTextIOS="Anuluj"
         confirmTextIOS="Zmień datę"
         headerTextIOS="Wybierz nową datę"
+        isDarkModeEnabled={false}
+        locale="pl_PL"
       />
     </View>
   );
