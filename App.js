@@ -10,8 +10,11 @@ import HomeScreen from "./app/screens/HomeScreen";
 import StatisticsScreen from "./app/screens/StatisticsScreen";
 import CalendarScreen from "./app/screens/CalendarScreen";
 import DeveloperScreen from "./app/screens/DeveloperScreen";
+import generateDates from "./app/utils/generateDates"
 
 const Stack = createStackNavigator();
+
+// console.log(generateDates())
 
 function App() {
   const headerOptions = {
