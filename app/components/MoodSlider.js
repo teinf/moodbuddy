@@ -33,7 +33,7 @@ function MoodSlider(props) {
           thumbTintColor={MoodColors[currentMood]}
           onValueChange={(value) => setCurrentMood(Math.round(value))}
         ></Slider>
-        <DateChanger date={currentDate} mode="date" style={styles.dateChanger} />
+        <DateChanger date={currentDate} mode="datetime" style={styles.dateChanger} />
       </Card>
     </View>
   );
