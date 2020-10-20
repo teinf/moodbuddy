@@ -30,21 +30,30 @@ function CalendarScreen(props) {
 
     function LoadElementsFromFile()
     {
-        // var key = day.dateString;
-        // var dayTimestamp = day.timestamp;
-
-        for(var timestamp in baza)
+        for (var timestamp in baza)
         {
             var nowaData = { };
             var key = ConvertTimestampToKey(parseInt(timestamp));
-            //console.log(key);
+            // console.log(key);
 
             var mood = baza[timestamp]["mood"];
             var color = MoodColors[mood];
 
-                
-            // if key exists = nie zamieniaj tej rzeczy, tylko dopisz
-            nowaData[key] = {selected: true, marked: true, selectedColor: color, timestamp: timestamp};
+            // for (var mood in baza[timestamp])
+            // {
+            //     console.log(mood);
+            // }
+
+            if(!baza.hasOwnProperty(key))
+            {
+                //console.log(baza[timestamp]);
+                nowaData[key] = {selected: true, marked: true, selectedColor: color, timestamp: timestamp};
+            }
+            else
+            {
+                // TO-DO
+                // nowaData[key] = {...nowaData[key], selected: true, marked: true, selectedColor: color, timestamp: timestamp}
+            }
             
             daty = {...daty, ...nowaData};
         }
