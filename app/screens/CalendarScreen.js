@@ -28,7 +28,7 @@ function CalendarScreen(props) {
     const [myMarkedDates, setMarkedDates] = useState();
     var baza = generateDates();
 
-    function MarkDay(day)
+    function LoadElementsFromFile()
     {
         // var key = day.dateString;
         // var dayTimestamp = day.timestamp;
@@ -42,7 +42,7 @@ function CalendarScreen(props) {
             var mood = baza[timestamp]["mood"];
             var color = MoodColors[mood];
 
-
+                
             // if key exists = nie zamieniaj tej rzeczy, tylko dopisz
             nowaData[key] = {selected: true, marked: true, selectedColor: color, timestamp: timestamp};
             
@@ -52,11 +52,17 @@ function CalendarScreen(props) {
         setMarkedDates(daty);
     }
 
+    function OpenDayView(day)
+    {
+
+    }
+
     return (
         <View>
             <CalendarList
                 // renderDay={(day, item) => {return (<View />);}}
-                onDayPress={(day) => {MarkDay(day)}}
+                onVisibleMonthsChange={() => {LoadElementsFromFile()}}
+                onDayPress={(day) => {OpenDayView(day)}}
                 onDayLongPress={(day) => {console.log('selected day', day)}}
                 firstDay={1}
                 horizontal={true}
