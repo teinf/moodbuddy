@@ -9,7 +9,7 @@ function HomeScreen({navigation}) {
             <Text style={styles.welcomeText}>
                 Jak się masz?
             </Text>
-            <MoodSlider />
+            <MoodSlider onValueChange={(value) => null}/>
             <Button title="Zapisz"/>
         </View>
     );

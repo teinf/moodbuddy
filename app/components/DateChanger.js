@@ -6,7 +6,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Colors from "../constants/colors"
 import { FontAwesome } from '@expo/vector-icons'; 
 
-function DateChanger({ date, mode="datetime", style }) {
+function DateChanger({ date, mode="datetime", onDateChange, style }) {
   const [currentDate, setCurrentDate] = useState(date);
   const [showPicker, setShowPicker] = useState(false);
 
@@ -22,6 +22,12 @@ function DateChanger({ date, mode="datetime", style }) {
     return d.toLocaleDateString("pl-PL", options)
   }
 
+  function onDateConfirm(value) {
+    setCurrentDate(value);
+    setShowPicker(false)
+    onDateChange(value)
+  }
+
   return (
     <View style={style}>
       <TouchableOpacity onPress={() => setShowPicker(true)} style={styles.container}>
@@ -34,7 +40,7 @@ function DateChanger({ date, mode="datetime", style }) {
         isVisible={showPicker}
         date={currentDate}
         mode={mode}
-        onConfirm={(value) => {setCurrentDate(value); setShowPicker(false)}}
+        onConfirm={(value) => onDateConfirm(value)}
         onCancel={() => setShowPicker(false)}
         cancelTextIOS="Anuluj"
         confirmTextIOS="Zmień datę"

@@ -10,10 +10,15 @@ import MoodEmojis from "../constants/moodEmojis";
 import Card from "./Card";
 import DateChanger from "./DateChanger";
 
-function MoodSlider(props) {
+function MoodSlider({onValueChange}) {
   const STARTING_MOOD = 3
   const [currentMood, setCurrentMood] = useState(STARTING_MOOD);
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()))
+
+  function onSliderChange(value) {
+    setCurrentMood(Math.round(value))
+    onValueChange(currentMood);
+  }
 
   return (
     <View style={[styles.container]}>
@@ -31,7 +36,7 @@ function MoodSlider(props) {
           value={STARTING_MOOD}
           minimumTrackTintColor={MoodColors[currentMood]}
           thumbTintColor={MoodColors[currentMood]}
-          onValueChange={(value) => setCurrentMood(Math.round(value))}
+          onValueChange={(value) => onSliderChange(value)}
         ></Slider>
         <DateChanger date={currentDate} mode="datetime" style={styles.dateChanger} />
       </Card>
