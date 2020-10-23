@@ -3,18 +3,21 @@ import { Text, View, StyleSheet, Platform } from "react-native";
 import Slider from "@react-native-community/slider";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import Colors from "../constants/colors";
 import MoodColors from "../constants/moodColors";
-import Moods from "../constants/moods";
+import MoodNames from "../constants/moodNames";
 import MoodEmojis from "../constants/moodEmojis";
 
 import Card from "./Card";
 import DateChanger from "./DateChanger";
 
-function MoodSlider(props) {
+function MoodSlider({onValueChange=function(value) {}}) {
   const STARTING_MOOD = 3
   const [currentMood, setCurrentMood] = useState(STARTING_MOOD);
-  const [currentDate, setCurrentDate] = useState(Date.now())
+
+  function onSliderChange(value) {
+    setCurrentMood(Math.round(value))
+    onValueChange(currentMood);
+  }
 
   return (
     <View style={[styles.container]}>
@@ -24,7 +27,7 @@ function MoodSlider(props) {
           size={64}
           color={MoodColors[currentMood]}
         />
-        <Text style={[styles.moodText]}>{Moods[currentMood]}</Text>
+        <Text style={[styles.moodText]}>{MoodNames[currentMood]}</Text>
         <Slider
           style={[styles.slider]}
           minimumValue={0}
@@ -32,9 +35,8 @@ function MoodSlider(props) {
           value={STARTING_MOOD}
           minimumTrackTintColor={MoodColors[currentMood]}
           thumbTintColor={MoodColors[currentMood]}
-          onValueChange={(value) => setCurrentMood(Math.round(value))}
+          onValueChange={(value) => onSliderChange(value)}
         ></Slider>
-        <DateChanger date={currentDate} style={styles.dateChanger} />
       </Card>
     </View>
   );
@@ -61,10 +63,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 15
   },
-  
-  dateChanger: {
-    marginTop: 20
-  }
 });
 
 export default MoodSlider;
