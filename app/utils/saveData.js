@@ -3,7 +3,7 @@ async function saveData(key,value){
     try {
       await AsyncStorage.setItem(
         key,
-        value
+        JSON.stringify(value)
       );
     } catch (error) {
         console.log(error)

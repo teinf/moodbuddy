@@ -8,7 +8,6 @@ import MoodNames from "../constants/moodNames";
 import MoodEmojis from "../constants/moodEmojis";
 
 import Card from "./Card";
-import DateChanger from "./DateChanger";
 
 function MoodSlider({onValueChange=function(value) {}}) {
   const STARTING_MOOD = 3
