@@ -6,7 +6,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Colors from "../constants/colors"
 import { FontAwesome } from '@expo/vector-icons'; 
 
-function DateChanger({ date, mode="datetime", onDateChange, style }) {
+function DateChanger({ date, mode="datetime", onDateChange=function(date) {}, style }) {
   const [currentDate, setCurrentDate] = useState(date);
   const [showPicker, setShowPicker] = useState(false);
 
@@ -25,9 +25,7 @@ function DateChanger({ date, mode="datetime", onDateChange, style }) {
   function onDateConfirm(value) {
     setCurrentDate(value);
     setShowPicker(false)
-    if(!isNaN(onDateChange)) {
-      onDateChange(value)
-    }
+    onDateChange(value)
   }
 
   return (

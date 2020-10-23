@@ -10,16 +10,14 @@ import MoodEmojis from "../constants/moodEmojis";
 import Card from "./Card";
 import DateChanger from "./DateChanger";
 
-function MoodSlider({onValueChange}) {
+function MoodSlider({onValueChange=function(value) {}}) {
   const STARTING_MOOD = 3
   const [currentMood, setCurrentMood] = useState(STARTING_MOOD);
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()))
 
   function onSliderChange(value) {
     setCurrentMood(Math.round(value))
-    if(!isNaN(onValueChange)) {
-      onValueChange(currentMood);
-    } 
+    onValueChange(currentMood);
   }
 
   return (
