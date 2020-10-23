@@ -46,7 +46,7 @@ function App() {
             component={StatisticsScreen}
             options={headerOptions}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="Kalendarz"
             component={CalendarScreen}
             options={headerOptions}
