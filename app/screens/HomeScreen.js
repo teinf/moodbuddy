@@ -6,25 +6,17 @@ import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
 import getData from "../utils/getData";
-
-import AsyncStorage from '@react-native-community/async-storage';
-import { withSafeAreaInsets } from "react-native-safe-area-context";
+import getAllData from "../utils/getAllData"
 
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
-  const [mood, setMood] = useState(0);
+  const [mood, setMood] = useState(3);
 
   async function onSaveButtonPress() {
     await saveData(currentDate.getTime().toString(), {
       mood: mood,
       emotions: [1, 2, 3],
     });
-
-    const allKeys = await AsyncStorage.getAllKeys();
-    allKeys.sort()
-    for(var i=0; i<allKeys.length; i++) {
-        console.log(allKeys[i])
-    }
   }
 
   return (
