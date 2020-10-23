@@ -13,7 +13,6 @@ import DateChanger from "./DateChanger";
 function MoodSlider({onValueChange=function(value) {}}) {
   const STARTING_MOOD = 3
   const [currentMood, setCurrentMood] = useState(STARTING_MOOD);
-  const [currentDate, setCurrentDate] = useState(new Date(Date.now()))
 
   function onSliderChange(value) {
     setCurrentMood(Math.round(value))
@@ -38,7 +37,6 @@ function MoodSlider({onValueChange=function(value) {}}) {
           thumbTintColor={MoodColors[currentMood]}
           onValueChange={(value) => onSliderChange(value)}
         ></Slider>
-        <DateChanger date={currentDate} mode="datetime" style={styles.dateChanger} />
       </Card>
     </View>
   );
@@ -65,10 +63,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 15
   },
-  
-  dateChanger: {
-    marginTop: 20
-  }
 });
 
 export default MoodSlider;
