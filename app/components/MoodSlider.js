@@ -3,17 +3,22 @@ import { Text, View, StyleSheet, Platform } from "react-native";
 import Slider from "@react-native-community/slider";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import Colors from "../constants/colors";
 import MoodColors from "../constants/moodColors";
-import Moods from "../constants/moods";
+import MoodNames from "../constants/moodNames";
 import MoodEmojis from "../constants/moodEmojis";
 
 import Card from "./Card";
 import DateChanger from "./DateChanger";
 
-function MoodSlider(props) {
-  const [currentMood, setCurrentMood] = useState(2);
-  const [currentDate, setCurrentDate] = useState(Date.now())
+function MoodSlider({onValueChange=function(value) {}}) {
+  const STARTING_MOOD = 3
+  const [currentMood, setCurrentMood] = useState(STARTING_MOOD);
+  const [currentDate, setCurrentDate] = useState(new Date(Date.now()))
+
+  function onSliderChange(value) {
+    setCurrentMood(Math.round(value))
+    onValueChange(currentMood);
+  }
 
   return (
     <View style={[styles.container]}>
@@ -23,17 +28,17 @@ function MoodSlider(props) {
           size={64}
           color={MoodColors[currentMood]}
         />
-        <DateChanger date={currentDate}/>
+        <Text style={[styles.moodText]}>{MoodNames[currentMood]}</Text>
         <Slider
           style={[styles.slider]}
           minimumValue={0}
           maximumValue={4}
-          value={2}
+          value={STARTING_MOOD}
           minimumTrackTintColor={MoodColors[currentMood]}
           thumbTintColor={MoodColors[currentMood]}
-          onValueChange={(value) => setCurrentMood(Math.round(value))}
+          onValueChange={(value) => onSliderChange(value)}
         ></Slider>
-        <Text style={[styles.moodText]}>{Moods[currentMood]}</Text>
+        <DateChanger date={currentDate} mode="datetime" style={styles.dateChanger} />
       </Card>
     </View>
   );
@@ -48,17 +53,22 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     padding: 30,
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
 
   slider: {
     width: "75%",
-    marginVertical: 20,
+    marginVertical: 5,
   },
 
   moodText: {
     fontSize: 16,
+    marginTop: 15
   },
+  
+  dateChanger: {
+    marginTop: 20
+  }
 });
 
 export default MoodSlider;
