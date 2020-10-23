@@ -17,7 +17,9 @@ function MoodSlider({onValueChange}) {
 
   function onSliderChange(value) {
     setCurrentMood(Math.round(value))
-    onValueChange(currentMood);
+    if(!isNaN(onValueChange)) {
+      onValueChange(currentMood);
+    } 
   }
 
   return (

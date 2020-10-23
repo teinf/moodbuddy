@@ -25,7 +25,9 @@ function DateChanger({ date, mode="datetime", onDateChange, style }) {
   function onDateConfirm(value) {
     setCurrentDate(value);
     setShowPicker(false)
-    onDateChange(value)
+    if(!isNaN(onDateChange)) {
+      onDateChange(value)
+    }
   }
 
   return (
