@@ -1,9 +1,9 @@
 export default{
-    0: "Radość",
-    1: "Gniew",
-    2: "Wypoczęty",
-    3: "Zmęczony",
-    4: "Chory",
+    0: "Wesoły",
+    1: "Zadowolony",
+    2: "Pewny siebie",
+    3: "Stres",
+    4: "Nuda",
     5: "Zabieganie",
     
 }
