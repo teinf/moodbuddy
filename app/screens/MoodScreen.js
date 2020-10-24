@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     
   },
   FlatButton:{
-    marginHorizontal:10,
+    marginHorizontal: 10,
     marginVertical: 10,
   },
 

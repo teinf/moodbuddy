@@ -6,7 +6,9 @@ import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
 import getData from "../utils/getData";
-import getAllData from "../utils/getAllData"
+import getAllData from "../utils/getAllData";
+import EmotionPicker from "../components/EmotionPicker";
+import { ScrollView } from "react-native-gesture-handler";
 
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
@@ -21,15 +23,16 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.screen}>
-      <Text style={styles.welcomeText}>Jak się masz?</Text>
-      <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
-      <DateChanger
-        date={currentDate}
-        mode="datetime"
-        style={styles.dateChanger}
-      />
+        {/* <Text style={styles.welcomeText}>Jak się masz?</Text>
+        <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
+        <DateChanger
+          date={currentDate}
+          mode="datetime"
+          style={styles.dateChanger}
+        />
 
-      <Button title="Zapisz" onPress={onSaveButtonPress} />
+      <Button title="Zapisz" onPress={onSaveButtonPress} /> */}
+      <EmotionPicker onValueChange={(v) => null}/>
     </View>
   );
 }
