@@ -7,29 +7,30 @@ import Colors from "../constants/colors";
 import {LocaleConfig} from 'react-native-calendars';
 import MoodColors from "../constants/moodColors";
 import MoodNames from "../constants/moodNames";
-import generateDates from "../utils/generateDates";
+import getAllData from "../utils/getAllData";
 
 LocaleConfig.locales['pl'] = {
   monthNames: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'],
   monthNamesShort: ['Sty.','Luty','Mar.','Kw.','Maj','Cze.','Lip.','Sier.','Wrz.','Paź.','Lis.','Gr.'],
   dayNames: ['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'],
   dayNamesShort: ['Nd.','Pn.','Wt.','Śr.','Czw.','Pt.','Sb.'],
-  today: 'Dzisiaj\'Dziś' //???
+  today: 'Dzisiaj\'Dziś'
 };
 LocaleConfig.defaultLocale = 'pl';
 
 
-// Do tej zmiennej powinny zostać pobrane Dane z Pliku (dane o zaznaczonych Dniach)
-var daty = {}
 
+var daty = {}
 
 function CalendarScreen(props) {
 
     const [myMarkedDates, setMarkedDates] = useState();
-    var baza = generateDates();
+    
 
-    function LoadElementsFromFile()
+    async function loadElementsFromFile()
     {
+        const baza = await getAllData();
+        // console.log(baza);
         for (var timestamp in baza)
         {
             var nowaData = { };
@@ -44,16 +45,19 @@ function CalendarScreen(props) {
             //     console.log(mood);
             // }
 
-            if(!baza.hasOwnProperty(key))
-            {
-                //console.log(baza[timestamp]);
-                nowaData[key] = {selected: true, marked: true, selectedColor: color, timestamp: timestamp};
-            }
-            else
-            {
-                // TO-DO
-                // nowaData[key] = {...nowaData[key], selected: true, marked: true, selectedColor: color, timestamp: timestamp}
-            }
+            nowaData[key] = {selected: true, marked: true, selectedColor: color};
+
+            // if(!baza.hasOwnProperty(key))
+            // {
+            //     //console.log(baza[timestamp]);
+                
+            //     //nowaData[key] = {selected: true, marked: true, selectedColor: color, timestamp: timestamp};
+            // }
+            // else
+            // {
+            //     // TO-DO
+            //     // nowaData[key] = {...nowaData[key], selected: true, marked: true, selectedColor: color, timestamp: timestamp}
+            // }
             
             daty = {...daty, ...nowaData};
         }
@@ -61,17 +65,17 @@ function CalendarScreen(props) {
         setMarkedDates(daty);
     }
 
-    function OpenDayView(day)
-    {
+    // function openDayView(day)
+    // {
 
-    }
+    // }
 
     return (
         <View>
             <CalendarList
                 // renderDay={(day, item) => {return (<View />);}}
-                onVisibleMonthsChange={() => {LoadElementsFromFile()}}
-                onDayPress={(day) => {OpenDayView(day)}}
+                onVisibleMonthsChange={() => {loadElementsFromFile()}}
+                // onDayPress={(day) => {openDayView(day)}}
                 onDayLongPress={(day) => {console.log('selected day', day)}}
                 firstDay={1}
                 horizontal={true}

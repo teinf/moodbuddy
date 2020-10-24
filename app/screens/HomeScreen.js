@@ -6,8 +6,9 @@ import EmotionPicker from "../components/EmotionPicker";
 
 import Colors from '../constants/colors';
 
-function HomeScreen({navigation}) {
-    const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
+import saveData from "../utils/saveData";
+import getData from "../utils/getData";
+import getAllData from "../utils/getAllData"
 
     return (
 
@@ -24,19 +25,19 @@ function HomeScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        marginTop: 20
-    },
-    welcomeText: {
-        fontSize: 28,
-        color: Colors.primary,
-        fontWeight: "bold",
-        alignSelf: "center",
-        marginVertical: 10
-    },
-    dateChanger: {
-        padding: 20
-    }
-})
+  screen: {
+    marginTop: 20,
+  },
+  welcomeText: {
+    fontSize: 28,
+    color: Colors.primary,
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginVertical: 10,
+  },
+  dateChanger: {
+    padding: 20,
+  },
+});
 
 export default HomeScreen;
