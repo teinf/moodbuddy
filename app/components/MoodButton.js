@@ -16,7 +16,7 @@ export default function FlatButton({item, emotionEmojis, onPress, style}){
     return(
         <TouchableOpacity onPress={onPress} >
             <Card style={[styles.button, styles.emotionEmojis, style]}>
-                <FontAwesome5 name={emotionEmojis} size={24} color="black" style={styles.emotionEmojis} />
+                <FontAwesome5 name={emotionEmojis} size={24} color={Colors.light} style={styles.emotionEmojis} />
                 <Text style={styles.buttonText}>{item.text}</Text>
             </Card>
         </TouchableOpacity>
@@ -26,14 +26,14 @@ export default function FlatButton({item, emotionEmojis, onPress, style}){
 const styles = StyleSheet.create({
     button: {
         borderRadius: 8,
-        
+
         justifyContent: "center",
-        backgroundColor: colors.lightAccent,
-        width: 100,
-        height: 50,
+        backgroundColor: colors.primary,
+        width: 110,
+        height: 75,
     },
     buttonText: {
-        color: '#000',
+        color: colors.light,
         fontWeight: 'bold',
         textTransform: 'uppercase',
         fontSize: 14,
