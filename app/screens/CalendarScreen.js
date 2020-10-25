@@ -103,8 +103,7 @@ export default class CalendarScreen extends React.Component {
   }
 
   openAlert(day) {
-    const dwieGodziny = 7200000;
-    var timestamp = (day.timestamp - dwieGodziny).toString();
+    var timestamp = day.timestamp;
     if (!this.state.data.hasOwnProperty(timestamp)) return;
 
     // if(!daty.hasOwnProperty(d)) return;
