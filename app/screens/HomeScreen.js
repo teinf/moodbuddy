@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Alert } from "react-native";
 import DateChanger from "../components/DateChanger";
 import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
@@ -9,6 +9,9 @@ import getData from "../utils/getData";
 import getAllData from "../utils/getAllData";
 import EmotionPicker from "../components/EmotionPicker";
 import { ScrollView } from "react-native-gesture-handler";
+import ComplimentesBad from "../constants/complimentsBad";
+import ComplimentesGood from "../constants/complimentsGood";
+import ComplimentAlert from "../components/ComplimentAlert";
 
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
@@ -21,7 +24,7 @@ function HomeScreen({ navigation }) {
       emotions: emotions,
     });
   }
-
+  
   return (
     <View style={styles.screen}>
         <Text style={styles.welcomeText}>Jak się masz?</Text>
@@ -31,7 +34,10 @@ function HomeScreen({ navigation }) {
           mode="datetime"
           style={styles.dateChanger}
         />
-        <Button title="Zapisz" onPress={onSaveButtonPress} />
+        <Button title="Zapisz" onPress={() => {
+          onSaveButtonPress;
+          ComplimentAlert(mood);
+          }} />
         <EmotionPicker onValueChange={(v) => setEmotions(v)}/>
     </View>
   );
