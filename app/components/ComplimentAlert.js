@@ -16,9 +16,9 @@ export default function ComplimentAlert(mood){
       }
     
     if(mood < 3 ){
-        Alert.alert(' ',getRandomCompliment(ComplimentesBad),[{text: 'Ok', onPress:() =>('')}]);
+        Alert.alert('Komplement na dziś',getRandomCompliment(ComplimentesBad),[{text: 'Ok', onPress:() =>('')}]);
       }
       else{ 
-        Alert.alert(' ',getRandomCompliment(ComplimentesGood),[{text: 'Ok', onPress:() =>('')}]);
+        Alert.alert('Komplement na dziś',getRandomCompliment(ComplimentesGood),[{text: 'Ok', onPress:() =>('')}]);
       }
 }
