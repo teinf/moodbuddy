@@ -7,6 +7,7 @@ import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
 import ComplimentAlert from "../components/ComplimentAlert";
+import resetTimestampHours from "../utils/resetTimestampHours";
 
 const images = [
   require("../assets/babka0.png"),
@@ -17,11 +18,12 @@ const images = [
 ];
 
 function HomeScreen({ navigation }) {
-  const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
+  const [currentDate, setCurrentDate] = useState(new Date(resetTimestampHours(Date.now())));
   const [mood, setMood] = useState(3);
   const [imageURI, setImageURI] = useState(require("../assets/babka3.png"));
 
   async function onSaveButtonPress() {
+    console.log()
     await saveData(currentDate.getTime().toString(), {
       mood: mood,
       emotions: [],
@@ -48,14 +50,14 @@ function HomeScreen({ navigation }) {
         date={currentDate}
         mode="date"
         style={styles.dateChanger}
-        onDateChange={(d) => setCurrentDate(d)}
+        onDateChange={(d) => {setCurrentDate(d);}}
       />
       <View style={styles.buttons}>
         <Button
           title="Dalej"
           onPress={() =>
             navigation.navigate("Emocje", {
-              date: currentDate.getTime(),
+              date: resetTimestampHours(currentDate.getTime()),
               mood: mood,
             })
           }
