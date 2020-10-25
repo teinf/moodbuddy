@@ -32,6 +32,7 @@ function HomeScreen({ navigation }) {
         date={currentDate}
         mode="datetime"
         style={styles.dateChanger}
+        onDateChange={(d) => setCurrentDate(d)}
       />
       <View style={styles.buttons}>
         <Button
