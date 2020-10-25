@@ -113,17 +113,6 @@ export default class StatisticsScreen extends React.Component {
       <ScrollView style={styles.main}>
         <Image source={require("../assets/statystyki.png")} style={{ width: 200, height: 200, alignSelf: "center", resizeMode: "contain"}}/>
         <Card style={styles.margin}>
-        <Text style={styles.title}>Podsumowanie</Text>
-        <PieChart
-          data={this.state.pieChartData}
-          width={screenWidth-5}
-          height={200}
-          chartConfig={this.pieChartConfig}
-          accessor="amount"
-          backgroundColor="transparent"
-        />
-        </Card>
-        <Card style={styles.margin}>
           
           <Text style={styles.title}>Ten tydzień</Text>
         <PieChart
@@ -140,6 +129,17 @@ export default class StatisticsScreen extends React.Component {
           <Text style={styles.title}>Ten miesiąc</Text>
         <PieChart
           data={this.state.lastMonth}
+          width={screenWidth-5}
+          height={200}
+          chartConfig={this.pieChartConfig}
+          accessor="amount"
+          backgroundColor="transparent"
+        />
+        </Card>
+        <Card style={styles.margin}>
+        <Text style={styles.title}>Podsumowanie</Text>
+        <PieChart
+          data={this.state.pieChartData}
           width={screenWidth-5}
           height={200}
           chartConfig={this.pieChartConfig}
