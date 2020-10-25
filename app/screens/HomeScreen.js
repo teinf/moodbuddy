@@ -5,6 +5,7 @@ import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
+import ComplimentAlert from "../components/ComplimentAlert";
 
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
@@ -42,7 +43,10 @@ function HomeScreen({ navigation }) {
             })
           }
         />
-        <Button title="Zapisz" onPress={() => onSaveButtonPress()} />
+        <Button title="Zapisz" onPress={() => {
+          onSaveButtonPress();
+          ComplimentAlert(mood);
+          }} />
         <Button
           title="Anuluj"
           onPress={() =>
@@ -50,6 +54,7 @@ function HomeScreen({ navigation }) {
               index: 0,
               routes: [{ name: "Dashboard" }],
             })
+            
           }
         />
       </View>
@@ -73,6 +78,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   buttons: {
+    margin: 20,
     flexDirection: "row",
     justifyContent: "center",
   },
