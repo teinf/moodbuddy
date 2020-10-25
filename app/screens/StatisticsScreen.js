@@ -17,7 +17,7 @@ function StatisticsScreen({ navigation }) {
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
   };
-
+  
   const baza = generateDates();
 
   function generatePieChartData() {

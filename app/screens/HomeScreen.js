@@ -31,8 +31,8 @@ function HomeScreen({ navigation }) {
           mode="datetime"
           style={styles.dateChanger}
         />
-      <EmotionPicker onValueChange={(v) => setEmotions(v)}/>
-      <Button title="Zapisz" onPress={onSaveButtonPress} />
+        <Button title="Zapisz" onPress={onSaveButtonPress} />
+        <EmotionPicker onValueChange={(v) => setEmotions(v)}/>
     </View>
   );
 }
