@@ -12,6 +12,9 @@ Aplikacja polegająca na poprawie samopoczucia i jego śledzenia.
 
 ## Uruchomienie projektu bez instalacji
 - [Expo](https://expo.io/@kamil-koziol/projects/moodbuddy)
+
+## Zdjęcia z aplikacji
+- [Zdjęcia](https://drive.google.com/drive/folders/1gLdlZpcR8lT7w3AMZSJ22R2s6eahYsyS?usp=sharing)
 ## Running project
 
 ### Requirements:
