@@ -36,7 +36,7 @@ function SaveDayScreen({ route, navigation }) {
         }
         ListFooterComponent={
           <View style={styles.buttons}>
-            <Button title="Zapisz" onPress={() => {
+            <Button style={{marginRight:15}} title="Zapisz" onPress={() => {
               onSaveButtonPress(mood)
               ComplimentAlert()
               navigation.reset({
