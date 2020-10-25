@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { Text, View, StyleSheet, ScrollView, Image} from "react-native";
 import { LineChart, PieChart } from "react-native-chart-kit";
 
 import { Dimensions } from "react-native";
@@ -111,6 +111,7 @@ export default class StatisticsScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.main}>
+        <Image source={require("../assets/statystyki.png")} style={{ width: 200, height: 200, alignSelf: "center", resizeMode: "contain"}}/>
         <Card style={styles.margin}>
         <Text style={styles.title}>Podsumowanie</Text>
         <PieChart
