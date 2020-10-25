@@ -10,6 +10,8 @@ Aplikacja polegająca na poprawie samopoczucia i jego śledzenia.
 - Kalendarz samopoczucia
 - Motywacyjne cytaty na poprawę chumoru
 
+## Uruchomienie projektu bez instalacji
+- [Expo](https://expo.io/@kamil-koziol/projects/moodbuddy)
 ## Running project
 
 ### Requirements:
