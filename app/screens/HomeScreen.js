@@ -1,44 +1,58 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Button, Alert } from "react-native";
+import { Text, View, StyleSheet, Button, StatusBar } from "react-native";
 import DateChanger from "../components/DateChanger";
 import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
-import getData from "../utils/getData";
-import getAllData from "../utils/getAllData";
-import EmotionPicker from "../components/EmotionPicker";
-import { ScrollView } from "react-native-gesture-handler";
-import ComplimentesBad from "../constants/complimentsBad";
-import ComplimentesGood from "../constants/complimentsGood";
-import ComplimentAlert from "../components/ComplimentAlert";
 
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
   const [mood, setMood] = useState(3);
-  const [emotions, setEmotions] = useState([]);
 
   async function onSaveButtonPress() {
     await saveData(currentDate.getTime().toString(), {
       mood: mood,
-      emotions: emotions,
+      emotions: [],
     });
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Dashboard" }],
+    })
   }
   
   return (
     <View style={styles.screen}>
-        <Text style={styles.welcomeText}>Jak się masz?</Text>
-        <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
-        <DateChanger
-          date={currentDate}
-          mode="datetime"
-          style={styles.dateChanger}
+      <StatusBar barStyle="light-content" />
+      <Text style={styles.welcomeText}>Jak się masz?</Text>
+      <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
+      <DateChanger
+        date={currentDate}
+        mode="datetime"
+        style={styles.dateChanger}
+      />
+      <View style={styles.buttons}>
+        <Button
+          title="Dalej"
+          onPress={() =>
+            navigation.navigate("Emocje", {
+              date: currentDate.getTime(),
+              mood: mood,
+            })
+          }
         />
-        <Button title="Zapisz" onPress={() => {
-          onSaveButtonPress;
-          ComplimentAlert(mood);
-          }} />
-        <EmotionPicker onValueChange={(v) => setEmotions(v)}/>
+        <Button title="Zapisz" onPress={() => onSaveButtonPress()} />
+        <Button
+          title="Anuluj"
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Dashboard" }],
+            })
+          }
+        />
+      </View>
     </View>
   );
 }
@@ -56,6 +70,11 @@ const styles = StyleSheet.create({
   },
   dateChanger: {
     padding: 20,
+    alignItems: "center"
+  },
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
 

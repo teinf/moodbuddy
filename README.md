@@ -1,5 +1,15 @@
 # HackHeroes2020
 
+# MoodBuddy
+
+Aplikacja polegająca na poprawie samopoczucia i jego śledzenia.
+
+## Aplikacja oferuje:
+- Zapisywanie samopoczucia oraz odczuwanych emoji na dany dzień
+- Wyświetlanie statystyk
+- Kalendarz samopoczucia
+- Motywacyjne cytaty na poprawę chumoru
+
 ## Running project
 
 ### Requirements:
@@ -11,8 +21,7 @@
 
 ```sh
 cd MoodBuddy
-npm install expo
-npm install expo-cli
+npm install
 ```
 
 ### Starting
