@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Button, SafeAreaView } from "react-native";
-import DateChanger from "../components/DateChanger";
-import MoodSlider from "../components/MoodSlider";
+import { Text, View, StyleSheet, Button, SafeAreaView, Image } from "react-native";
 import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
-import getData from "../utils/getData";
-import getAllData from "../utils/getAllData";
 import EmotionPicker from "../components/EmotionPicker";
-import { ScrollView } from "react-native-gesture-handler";
 
 function SaveDayScreen({ route, navigation }) {
   const date = new Date(route.params.date);
@@ -24,7 +19,7 @@ function SaveDayScreen({ route, navigation }) {
 
     navigation.reset({
       index: 0,
-      routes: [{ name: "Dashboard" }],
+      routes: [{ name: "MoodBuddy" }],
     });
   }
 
@@ -33,7 +28,10 @@ function SaveDayScreen({ route, navigation }) {
       <EmotionPicker
         onValueChange={(v) => setEmotions(v)}
         ListHeaderComponent={
-          <Text style={styles.welcomeText}>Jak się czujesz?</Text>
+          <View>
+            <Text style={styles.welcomeText}>Jak się czujesz?</Text>
+            <Image source={require("../assets/ptak.png")} style={styles.ptak}/>
+          </View>
         }
         ListFooterComponent={
           <View style={styles.buttons}>
@@ -41,7 +39,7 @@ function SaveDayScreen({ route, navigation }) {
               onSaveButtonPress()
               navigation.reset({
                 index: 0,
-                routes: [{ name: "Dashboard" }],
+                routes: [{ name: "MoodBuddy" }],
               });
               }} />
             <Button
@@ -49,7 +47,7 @@ function SaveDayScreen({ route, navigation }) {
               onPress={() => {
                 navigation.reset({
                   index: 0,
-                  routes: [{ name: "Dashboard" }],
+                  routes: [{ name: "MoodBuddy" }],
                 });
               }}
             />
@@ -77,6 +75,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginVertical: 20
   },
+  ptak: {
+    width: 200,
+    height: 200,
+    resizeMode: "contain",
+    alignSelf: "center",
+    marginVertical: 20
+  }
 });
 
 export default SaveDayScreen;

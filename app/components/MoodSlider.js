@@ -20,12 +20,7 @@ function MoodSlider({onValueChange=function(value) {}}) {
 
   return (
     <View style={[styles.container]}>
-      <Card style={styles.card}>
-        <FontAwesome5
-          name={MoodEmojis[currentMood]}
-          size={64}
-          color={MoodColors[currentMood]}
-        />
+      <View style={styles.card}>
         <Text style={[styles.moodText]}>{MoodNames[currentMood]}</Text>
         <Slider
           style={[styles.slider]}
@@ -36,7 +31,7 @@ function MoodSlider({onValueChange=function(value) {}}) {
           thumbTintColor={MoodColors[currentMood]}
           onValueChange={(value) => onSliderChange(value)}
         ></Slider>
-      </Card>
+      </View>
     </View>
   );
 }
@@ -44,18 +39,15 @@ function MoodSlider({onValueChange=function(value) {}}) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    padding: 20,
   },
   card: {
     width: "100%",
     alignItems: "center",
-    padding: 30,
-    backgroundColor: "white"
+    padding: 10,
   },
 
   slider: {
     width: "75%",
-    marginVertical: 5,
   },
 
   moodText: {

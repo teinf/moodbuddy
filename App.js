@@ -34,7 +34,7 @@ function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
-            name="Dashboard"
+            name="MoodBuddy"
             component={DashboardScreen}
             options={headerOptions}
           />
