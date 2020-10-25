@@ -9,6 +9,7 @@ import getAllData from "../utils/getAllData";
 import MoodNames from "../constants/moodNames";
 import MoodColors from "../constants/moodColors";
 import Card from "../components/Card";
+import Colors from "../constants/colors";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -62,14 +63,15 @@ export default class StatisticsScreen extends React.Component {
 
     var lastWeek = []
     var lastWeekStartingDate = daysAgo(new Date(Date.now()), 7);
-    console.log(lastWeekStartingDate)
     for(var key in daysData) {
       if(+key >= lastWeekStartingDate) {
         lastWeek.push(daysData[key])
       }
     }
+    this.setState({
+      lastWeek: this.generatePieChartData(lastWeek)
+    })
 
-    console.log(lastWeek)
 
   }
 
@@ -100,6 +102,7 @@ export default class StatisticsScreen extends React.Component {
     return (
       <View style={styles.main}>
         <Card>
+        <Text style={styles.title}>Podsumowanie</Text>
         <PieChart
           data={this.state.pieChartData}
           width={screenWidth-5}
@@ -109,17 +112,41 @@ export default class StatisticsScreen extends React.Component {
           backgroundColor="transparent"
         />
         </Card>
-
         <Card>
-        <Text>{this.state.averageMood}</Text>
+          
+          <Text style={styles.title}>Ten tydzień</Text>
+        <PieChart
+          data={this.state.lastWeek}
+          width={screenWidth-5}
+          height={200}
+          chartConfig={this.pieChartConfig}
+          accessor="amount"
+          backgroundColor="transparent"
+        />
+        </Card>
+        <Card>
+        <Text style={styles.text}>Twój średni humor to : <Text style={{color: MoodColors[this.state.averageMood]}}>{MoodNames[this.state.averageMood]}</Text></Text>
         </Card>
       </View>
     );
   }
 }
-
 const styles = StyleSheet.create({
   main: {
     alignItems: "center",
   },
+  text:{
+    textAlign: "center",
+    marginTop: 10,
+    padding: 20,
+    fontSize: 20,
+    color: Colors.primary
+  },
+  title:{
+    textAlign: "center",
+    marginTop: 10,
+    padding: 20,
+    fontSize: 25,
+    color: Colors.primary
+  }
 });

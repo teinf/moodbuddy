@@ -21,7 +21,7 @@ function HomeScreen({ navigation }) {
       routes: [{ name: "Dashboard" }],
     })
   }
-
+  
   return (
     <View style={styles.screen}>
       <StatusBar barStyle="light-content" />
