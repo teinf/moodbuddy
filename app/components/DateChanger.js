@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     borderRightColor: Colors.dark,
     borderRightWidth: 2,
     marginRight: 5,
+    textAlign: "center"
   },
   main: {
     flexDirection: "row",

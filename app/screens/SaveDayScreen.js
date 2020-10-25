@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, SafeAreaView } from "react-native";
 import DateChanger from "../components/DateChanger";
 import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
@@ -25,35 +25,44 @@ function SaveDayScreen({ route, navigation }) {
     navigation.reset({
       index: 0,
       routes: [{ name: "Dashboard" }],
-    })
-    
+    });
   }
 
   return (
-    <ScrollView style={styles.screen}>
-      <Text style={styles.welcomeText}>Jak się czujesz?</Text>
-      <View>
-        <EmotionPicker onValueChange={(v) => setEmotions(v)} />
-      </View>
-      <View style={styles.buttons}>
-        <Button title="Zapisz" onPress={onSaveButtonPress} />
-        <Button
-          title="Anuluj"
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "Dashboard" }],
-            });
-          }}
-        />
-      </View>
-    </ScrollView>
+    <SafeAreaView style={styles.screen}>
+      <EmotionPicker
+        onValueChange={(v) => setEmotions(v)}
+        ListHeaderComponent={
+          <Text style={styles.welcomeText}>Jak się czujesz?</Text>
+        }
+        ListFooterComponent={
+          <View style={styles.buttons}>
+            <Button title="Zapisz" onPress={() => {
+              onSaveButtonPress()
+              navigation.reset({
+                index: 0,
+                routes: [{ name: "Dashboard" }],
+              });
+              }} />
+            <Button
+              title="Anuluj"
+              onPress={() => {
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: "Dashboard" }],
+                });
+              }}
+            />
+          </View>
+        }
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
-    marginTop: 20,
+    marginVertical: 20,
     flex: 1,
   },
   welcomeText: {
@@ -66,6 +75,7 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
     justifyContent: "center",
+    marginVertical: 20
   },
 });
 

@@ -51,6 +51,8 @@ export default class EmotionPicker extends React.Component {
           )}
           numColumns={2}
           extraData={this.state}
+          ListFooterComponent={this.props.ListFooterComponent}
+          ListHeaderComponent={this.props.ListHeaderComponent}
         />
       </View>
     );

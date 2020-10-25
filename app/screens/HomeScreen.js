@@ -5,10 +5,6 @@ import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
-import getData from "../utils/getData";
-import getAllData from "../utils/getAllData";
-import EmotionPicker from "../components/EmotionPicker";
-import { ScrollView } from "react-native-gesture-handler";
 
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
@@ -19,11 +15,16 @@ function HomeScreen({ navigation }) {
       mood: mood,
       emotions: [],
     });
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Dashboard" }],
+    })
   }
 
   return (
     <View style={styles.screen}>
-      <StatusBar barStyle="light-content"/>
+      <StatusBar barStyle="light-content" />
       <Text style={styles.welcomeText}>Jak się masz?</Text>
       <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
       <DateChanger
@@ -31,25 +32,27 @@ function HomeScreen({ navigation }) {
         mode="datetime"
         style={styles.dateChanger}
       />
-      <Button
-        title="Dalej"
-        onPress={() =>
-          navigation.navigate("Emocje", {
-            date: currentDate.getTime(),
-            mood: mood,
-          })
-        }
-      />
-      <Button title="Zapisz" onPress={() => onSaveButtonPress()} />
-      <Button
-        title="Anuluj"
-        onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "Dashboard" }],
-          })
-        }
-      />
+      <View style={styles.buttons}>
+        <Button
+          title="Dalej"
+          onPress={() =>
+            navigation.navigate("Emocje", {
+              date: currentDate.getTime(),
+              mood: mood,
+            })
+          }
+        />
+        <Button title="Zapisz" onPress={() => onSaveButtonPress()} />
+        <Button
+          title="Anuluj"
+          onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Dashboard" }],
+            })
+          }
+        />
+      </View>
     </View>
   );
 }
@@ -67,6 +70,11 @@ const styles = StyleSheet.create({
   },
   dateChanger: {
     padding: 20,
+    alignItems: "center"
+  },
+  buttons: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
 
