@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, Button, FlatList, StyleSheet } from "react-native";
+import { Text, View, Button, FlatList, StyleSheet, Alert } from "react-native";
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 import Colors from "../constants/colors";
@@ -8,6 +8,9 @@ import {LocaleConfig} from 'react-native-calendars';
 import MoodColors from "../constants/moodColors";
 import MoodNames from "../constants/moodNames";
 import getAllData from "../utils/getAllData";
+import Emotions from "../constants/emotions";
+import AsyncStorage from "@react-native-community/async-storage";
+
 
 LocaleConfig.locales['pl'] = {
   monthNames: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'],
@@ -19,7 +22,7 @@ LocaleConfig.locales['pl'] = {
 LocaleConfig.defaultLocale = 'pl';
 
 
-
+var daty = {};
 export default class CalendarScreen extends React.Component
 {
     constructor(props)
@@ -46,8 +49,6 @@ export default class CalendarScreen extends React.Component
     
     loadElementsFromFile()
     {
-        var daty = {};
-
         for (var timestamp in this.state.data)
         {
             var nowaData = { };
@@ -55,10 +56,11 @@ export default class CalendarScreen extends React.Component
             var key = this.convertTimestampToKey(parseInt(timestamp));
 
             var mood = this.state.data[timestamp]["mood"];
+            var emotions = this.state.data[timestamp]["emotions"];
             var color = MoodColors[mood];
 
-            nowaData[key] = {selected: true, marked: true, selectedColor: color};
-
+            nowaData[key] = {selected: true, marked: true, selectedColor: color, mood: mood, emotions: emotions};
+            
             daty = {...daty, ...nowaData};
         }
 
@@ -67,29 +69,54 @@ export default class CalendarScreen extends React.Component
         })
     }
     
-    // function openDayView(day)
-    // {
+    openAlert(day)
+    {
+        var d = day.dateString;
+        
+        if(!daty.hasOwnProperty(d)) return;
 
-    // }
+        var mood = MoodNames[daty[d]["mood"]];
+        var emotionList = daty[d]["emotions"];
+        var allEmotions = "";
+
+        
+        for (var emo in emotionList)
+        {       
+            allEmotions += Emotions[emo] + ", ";
+        }
+
+        if (allEmotions == "") Alert.alert(mood, "Nie podano żadnych Emocji...", [{text: 'Ok', onPress:() =>('')}]);
+        else Alert.alert(mood, "Twoje Emocje to: " + allEmotions, [{text: 'Ok', onPress:() =>('')}]);
+    }
 
     render()
     {
         return (
-            <View>
                 <CalendarList
-                    // renderDay={(day, item) => {return (<View />);}}
+                    renderDay={(day, item) => {return (<View />);}}
                     // onVisibleMonthsChange={() => {loadElementsFromFile()}}
-                    // onDayPress={(day) => {openDayView(day)}}
-                    onDayLongPress={(day) => {console.log('selected day', day)}}
+                    onDayPress={(day) => {this.openAlert(day)}}
+                    // onDayLongPress={(day) => {console.log('selected day', day)}}
                     firstDay={1}
                     hideArrows={false}
                     horizontal={true}
+
                     pagingEnabled={true}
                     pastScrollRange={10}
                     futureScrollRange={10}
                     markedDates={this.state.myMarkedDates}
+
+                    // items={{
+                    //     '2020-10-22': [{name: 'item 1 - any js object'}],
+                    //     '2020-10-23': [{name: 'item 2 - any js object', height: 80}],
+                    //     '2020-10-24': [],
+                    //     '2020-10-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+                    //   }}
+                    //   //loadItemsForMonth={(month) => {console.log('trigger items loading')}}
+                    //   //renderDay={(day, item) => {return (<View />);}}
+                      
+
                 />
-            </View>
         );
     }
     
