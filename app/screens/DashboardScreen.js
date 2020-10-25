@@ -16,7 +16,7 @@ function DashboardScreen({ navigation }) {
     <ScrollView>
       <StatusBar barStyle="light-content" />
       <Image source={require("../assets/buddy.png")} style={styles.piesel} />
-      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Jak się masz?")}>
         <View style={styles.dashboardItem}>
           <View style={styles.dashboardLeft}>
             <Text style={styles.title}>Dodaj wpis</Text>

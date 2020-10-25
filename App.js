@@ -32,14 +32,14 @@ function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="MoodBuddy">
           <Stack.Screen
             name="MoodBuddy"
             component={DashboardScreen}
             options={headerOptions}
           />
           <Stack.Screen
-            name="Home"
+            name="Jak się masz?"
             component={HomeScreen}
             options={headerOptions}
           />
