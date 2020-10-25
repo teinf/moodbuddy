@@ -6,6 +6,7 @@ import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
+import ComplimentAlert from "../components/ComplimentAlert";
 
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
@@ -76,6 +77,7 @@ function HomeScreen({ navigation }) {
               index: 0,
               routes: [{ name: "MoodBuddy" }],
             })
+            
           }
         />
       </View>
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttons: {
+    margin: 20,
     flexDirection: "row",
     justifyContent: "center",
   },
