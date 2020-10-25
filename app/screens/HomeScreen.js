@@ -13,26 +13,26 @@ import { ScrollView } from "react-native-gesture-handler";
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
   const [mood, setMood] = useState(3);
+  const [emotions, setEmotions] = useState([]);
 
   async function onSaveButtonPress() {
     await saveData(currentDate.getTime().toString(), {
       mood: mood,
-      emotions: [1, 2, 3],
+      emotions: emotions,
     });
   }
 
   return (
     <View style={styles.screen}>
-        {/* <Text style={styles.welcomeText}>Jak się masz?</Text>
+        <Text style={styles.welcomeText}>Jak się masz?</Text>
         <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
         <DateChanger
           date={currentDate}
           mode="datetime"
           style={styles.dateChanger}
         />
-
-      <Button title="Zapisz" onPress={onSaveButtonPress} /> */}
-      <EmotionPicker onValueChange={(v) => null}/>
+      <EmotionPicker onValueChange={(v) => setEmotions(v)}/>
+      <Button title="Zapisz" onPress={onSaveButtonPress} />
     </View>
   );
 }
