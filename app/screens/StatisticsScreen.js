@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { LineChart, PieChart } from "react-native-chart-kit";
 
 import { Dimensions } from "react-native";
@@ -29,7 +29,8 @@ export default class StatisticsScreen extends React.Component {
       data: [],
       pieChartData: [],
       averageMood: 0,
-      lastWeek: []
+      lastWeek: [],
+      lastMonth:[]
     };
 
     this.pieChartConfig = {
@@ -59,17 +60,26 @@ export default class StatisticsScreen extends React.Component {
       averageMood: Math.round(totalMood/daysDataLength)
     })
 
-    // Ostatni tydzień
 
     var lastWeek = []
     var lastWeekStartingDate = daysAgo(new Date(Date.now()), 7);
     for(var key in daysData) {
-      if(+key >= lastWeekStartingDate) {
+      if(+key >= lastWeekStartingDate && +key <= Date.now()) {
         lastWeek.push(daysData[key])
       }
     }
     this.setState({
       lastWeek: this.generatePieChartData(lastWeek)
+    })
+    var lastMonth = []
+    var lastMonthStartingDate = daysAgo(new Date(Date.now()), 30);
+    for(var key in daysData) {
+      if(+key >= lastMonthStartingDate && +key <= Date.now()) {
+        lastMonth.push(daysData[key])
+      }
+    }
+    this.setState({
+      lastMonth: this.generatePieChartData(lastMonth)
     })
 
 
@@ -100,8 +110,8 @@ export default class StatisticsScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.main}>
-        <Card>
+      <ScrollView style={styles.main}>
+        <Card style={styles.margin}>
         <Text style={styles.title}>Podsumowanie</Text>
         <PieChart
           data={this.state.pieChartData}
@@ -112,7 +122,7 @@ export default class StatisticsScreen extends React.Component {
           backgroundColor="transparent"
         />
         </Card>
-        <Card>
+        <Card style={styles.margin}>
           
           <Text style={styles.title}>Ten tydzień</Text>
         <PieChart
@@ -124,20 +134,31 @@ export default class StatisticsScreen extends React.Component {
           backgroundColor="transparent"
         />
         </Card>
-        <Card>
+        <Card style={styles.margin}>
+          
+          <Text style={styles.title}>Ten miesiąc</Text>
+        <PieChart
+          data={this.state.lastMonth}
+          width={screenWidth-5}
+          height={200}
+          chartConfig={this.pieChartConfig}
+          accessor="amount"
+          backgroundColor="transparent"
+        />
+        </Card>
+        <Card style={styles.margin}>
         <Text style={styles.text}>Twój średni humor to : <Text style={{color: MoodColors[this.state.averageMood]}}>{MoodNames[this.state.averageMood]}</Text></Text>
         </Card>
-      </View>
+      </ScrollView>
     );
   }
 }
 const styles = StyleSheet.create({
   main: {
-    alignItems: "center",
+    marginVertical: 10
   },
   text:{
     textAlign: "center",
-    marginTop: 10,
     padding: 20,
     fontSize: 20,
     color: Colors.primary
@@ -148,5 +169,9 @@ const styles = StyleSheet.create({
     padding: 20,
     fontSize: 25,
     color: Colors.primary
+  },
+  margin:{
+    marginVertical: 10,
+    backgroundColor: Colors.light
   }
 });

@@ -29,7 +29,7 @@ function HomeScreen({ navigation }) {
     <ScrollView style={styles.screen}>
       <StatusBar barStyle="light-content" />
       <Text style={styles.welcomeText}>Jak się masz?</Text>
-      <Image source={imageURI} style={styles.babka} />
+      <Image fadeDuration={0} source={imageURI} style={styles.babka} />
       <MoodSlider
         onValueChange={(moodValue) => {
           setMood(moodValue);
