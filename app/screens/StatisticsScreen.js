@@ -8,6 +8,7 @@ import generateDates from "../utils/generateDates";
 
 import MoodNames from "../constants/moodNames";
 import MoodColors from "../constants/moodColors";
+import getAllData from "../utils/getAllData";
 
 const screenWidth = Dimensions.get("window").width;
 
