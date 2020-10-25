@@ -126,7 +126,7 @@ export default class StatisticsScreen extends React.Component {
         </Card>
         <Card style={styles.margin}>
           
-          <Text style={styles.title}>Ten miesiąc</Text>
+          <Text style={styles.title}>Ostatnie 30 dni</Text>
         <PieChart
           data={this.state.lastMonth}
           width={screenWidth-5}
