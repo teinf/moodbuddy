@@ -8,6 +8,14 @@ import Colors from "../constants/colors";
 import saveData from "../utils/saveData";
 import ComplimentAlert from "../components/ComplimentAlert";
 
+const images = [
+  require("../assets/babka0.png"),
+  require("../assets/babka1.png"),
+  require("../assets/babka2.png"),
+  require("../assets/babka3.png"),
+  require("../assets/babka4.png"),
+];
+
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
   const [mood, setMood] = useState(3);
@@ -33,30 +41,12 @@ function HomeScreen({ navigation }) {
       <MoodSlider
         onValueChange={(moodValue) => {
           setMood(moodValue);
-          switch (moodValue) {
-            case 0:
-              setImageURI(require("../assets/babka0.png"));
-              break;
-            case 1:
-              setImageURI(require("../assets/babka1.png"));
-              break;
-            case 2:
-              setImageURI(require("../assets/babka2.png"));
-              break;
-            case 3:
-              setImageURI(require("../assets/babka3.png"));
-              break;
-            case 4:
-              setImageURI(require("../assets/babka4.png"));
-              break;
-            default:
-              break;
-          }
+          setImageURI(images[moodValue])
         }}
       />
       <DateChanger
         date={currentDate}
-        mode="datetime"
+        mode="date"
         style={styles.dateChanger}
         onDateChange={(d) => setCurrentDate(d)}
       />
@@ -77,7 +67,6 @@ function HomeScreen({ navigation }) {
               index: 0,
               routes: [{ name: "MoodBuddy" }],
             })
-            
           }
         />
       </View>
