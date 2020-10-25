@@ -28,7 +28,7 @@ export default class CalendarScreen extends React.Component
 
         this.state = {
             data: [],
-            myMarkedDates: []
+            myMarkedDates: {}
           };
     }
 
@@ -47,36 +47,18 @@ export default class CalendarScreen extends React.Component
     loadElementsFromFile()
     {
         var daty = {};
-        
+
         for (var timestamp in this.state.data)
         {
             var nowaData = { };
             
             var key = this.convertTimestampToKey(parseInt(timestamp));
-            // console.log(key);
 
             var mood = this.state.data[timestamp]["mood"];
             var color = MoodColors[mood];
 
-            // for (var mood in baza[timestamp])
-            // {
-            //     console.log(mood);
-            // }
-
             nowaData[key] = {selected: true, marked: true, selectedColor: color};
 
-            // if(!baza.hasOwnProperty(key))
-            // {
-            //     //console.log(baza[timestamp]);
-                
-            //     //nowaData[key] = {selected: true, marked: true, selectedColor: color, timestamp: timestamp};
-            // }
-            // else
-            // {
-            //     // TO-DO
-            //     // nowaData[key] = {...nowaData[key], selected: true, marked: true, selectedColor: color, timestamp: timestamp}
-            // }
-            
             daty = {...daty, ...nowaData};
         }
 
