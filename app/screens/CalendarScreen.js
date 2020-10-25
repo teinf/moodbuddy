@@ -20,24 +20,42 @@ LocaleConfig.defaultLocale = 'pl';
 
 
 
-var daty = {}
-
-function CalendarScreen(props) {
-
-    const [myMarkedDates, setMarkedDates] = useState();
-    
-
-    async function loadElementsFromFile()
+export default class CalendarScreen extends React.Component
+{
+    constructor(props)
     {
-        const baza = await getAllData();
-        // console.log(baza);
-        for (var timestamp in baza)
+        super(props);
+
+        this.state = {
+            data: [],
+            myMarkedDates: []
+          };
+    }
+
+    async componentDidMount() {
+
+        const daysData = await getAllData();
+
+        this.setState({
+          data: daysData,
+        })
+
+        this.loadElementsFromFile();
+    }
+
+    
+    loadElementsFromFile()
+    {
+        var daty = {};
+        
+        for (var timestamp in this.state.data)
         {
             var nowaData = { };
-            var key = ConvertTimestampToKey(parseInt(timestamp));
+            
+            var key = this.convertTimestampToKey(parseInt(timestamp));
             // console.log(key);
 
-            var mood = baza[timestamp]["mood"];
+            var mood = this.state.data[timestamp]["mood"];
             var color = MoodColors[mood];
 
             // for (var mood in baza[timestamp])
@@ -62,49 +80,50 @@ function CalendarScreen(props) {
             daty = {...daty, ...nowaData};
         }
 
-        setMarkedDates(daty);
+        this.setState({
+            myMarkedDates: daty
+        })
     }
-
+    
     // function openDayView(day)
     // {
 
     // }
 
-    return (
-        <View>
-            <CalendarList
-                // renderDay={(day, item) => {return (<View />);}}
-                onVisibleMonthsChange={() => {loadElementsFromFile()}}
-                // onDayPress={(day) => {openDayView(day)}}
-                onDayLongPress={(day) => {console.log('selected day', day)}}
-                firstDay={1}
-                horizontal={true}
-                pagingEnabled={true}
-                pastScrollRange={10}
-                futureScrollRange={10}
-                markedDates={myMarkedDates}
-            />
-        </View>
-      );
-}
-
-function ConvertTimestampToKey(timestamp)
-{
-    var date = new Date(timestamp);
-
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
+    render()
+    {
+        return (
+            <View>
+                <CalendarList
+                    // renderDay={(day, item) => {return (<View />);}}
+                    // onVisibleMonthsChange={() => {loadElementsFromFile()}}
+                    // onDayPress={(day) => {openDayView(day)}}
+                    onDayLongPress={(day) => {console.log('selected day', day)}}
+                    firstDay={1}
+                    hideArrows={false}
+                    horizontal={true}
+                    pagingEnabled={true}
+                    pastScrollRange={10}
+                    futureScrollRange={10}
+                    markedDates={this.state.myMarkedDates}
+                />
+            </View>
+        );
+    }
     
-    if (day < 10) {day = "0" + String(day)};
-    if (month < 10) {month = "0" + String(month)};
-
-    var key = year + "-" + month + "-" + day;
-    return key;
+    
+    convertTimestampToKey(timestamp)
+    {
+        var date = new Date(timestamp);
+    
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        
+        if (day < 10) {day = "0" + String(day)};
+        if (month < 10) {month = "0" + String(month)};
+    
+        var key = year + "-" + month + "-" + day;
+        return key;
+    }
 }
-
-const styles = StyleSheet.create({
-
-});
-
-export default CalendarScreen;
