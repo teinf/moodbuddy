@@ -9,7 +9,6 @@ import getAllData from "../utils/getAllData";
 import MoodNames from "../constants/moodNames";
 import MoodColors from "../constants/moodColors";
 import Card from "../components/Card";
-import getAllData from "../utils/getAllData";
 
 const screenWidth = Dimensions.get("window").width;
 
