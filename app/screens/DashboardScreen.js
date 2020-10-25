@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import Colors from "../constants/colors";
+import { ScrollView } from "react-native-gesture-handler";
 
 function DashboardScreen({ navigation }) {
   return (
-    <View>
+    <ScrollView>
       <StatusBar barStyle="light-content" />
       <Image source={require("../assets/buddy.png")} style={styles.piesel} />
       <TouchableOpacity onPress={() => navigation.navigate("Home")}>
@@ -42,7 +43,7 @@ function DashboardScreen({ navigation }) {
           <FontAwesome name="angle-right" size={24} color="black" />
         </View>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 

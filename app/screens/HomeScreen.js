@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Button, StatusBar } from "react-native";
+import { Text, View, StyleSheet, Button, StatusBar, Image } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import DateChanger from "../components/DateChanger";
 import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
+import ComplimentAlert from "../components/ComplimentAlert";
 
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
   const [mood, setMood] = useState(3);
+  const [imageURI, setImageURI] = useState(require("../assets/babka3.png"));
 
   async function onSaveButtonPress() {
     await saveData(currentDate.getTime().toString(), {
@@ -18,15 +21,39 @@ function HomeScreen({ navigation }) {
 
     navigation.reset({
       index: 0,
-      routes: [{ name: "Dashboard" }],
-    })
+      routes: [{ name: "MoodBuddy" }],
+    });
   }
-  
+
   return (
-    <View style={styles.screen}>
+    <ScrollView style={styles.screen}>
       <StatusBar barStyle="light-content" />
       <Text style={styles.welcomeText}>Jak się masz?</Text>
-      <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
+      <Image source={imageURI} style={styles.babka} />
+      <MoodSlider
+        onValueChange={(moodValue) => {
+          setMood(moodValue);
+          switch (moodValue) {
+            case 0:
+              setImageURI(require("../assets/babka0.png"));
+              break;
+            case 1:
+              setImageURI(require("../assets/babka1.png"));
+              break;
+            case 2:
+              setImageURI(require("../assets/babka2.png"));
+              break;
+            case 3:
+              setImageURI(require("../assets/babka3.png"));
+              break;
+            case 4:
+              setImageURI(require("../assets/babka4.png"));
+              break;
+            default:
+              break;
+          }
+        }}
+      />
       <DateChanger
         date={currentDate}
         mode="datetime"
@@ -43,18 +70,18 @@ function HomeScreen({ navigation }) {
             })
           }
         />
-        <Button title="Zapisz" onPress={() => onSaveButtonPress()} />
         <Button
           title="Anuluj"
           onPress={() =>
             navigation.reset({
               index: 0,
-              routes: [{ name: "Dashboard" }],
+              routes: [{ name: "MoodBuddy" }],
             })
+            
           }
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -67,15 +94,22 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontWeight: "bold",
     alignSelf: "center",
-    marginVertical: 10,
   },
   dateChanger: {
-    padding: 20,
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 10,
   },
   buttons: {
+    margin: 20,
     flexDirection: "row",
     justifyContent: "center",
+  },
+  babka: {
+    width: 200,
+    height: 200,
+    resizeMode: "contain",
+    alignSelf: "center",
+    marginVertical: 20,
   },
 });
 

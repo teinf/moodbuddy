@@ -31,10 +31,10 @@ function DateChanger({ date, mode="datetime", onDateChange=function(date) {}, st
   return (
     <View style={style}>
       <TouchableOpacity onPress={() => setShowPicker(true)} style={styles.container}>
-        <Card style={styles.main}>
+        <View style={styles.main}>
           <Text style={styles.dateText}>{formatDate(currentDate)}</Text>
           <FontAwesome name="calendar" size={18} color="black" />
-        </Card>
+        </View>
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={showPicker}
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     alignContent: "space-between",
     padding: 10,
 
-    backgroundColor: Colors.light
+    // backgroundColor: Colors.light
   }
 });
 
