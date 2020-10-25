@@ -11,6 +11,8 @@ import StatisticsScreen from "./app/screens/StatisticsScreen";
 import CalendarScreen from "./app/screens/CalendarScreen";
 import DeveloperScreen from "./app/screens/DeveloperScreen";
 import generateDates from "./app/utils/generateDates"
+import SaveDayScreen from "./app/screens/SaveDayScreen";
+import DashboardScreen from "./app/screens/DashboardScreen";
 
 const Stack = createStackNavigator();
 
@@ -37,8 +39,18 @@ function App() {
             options={headerOptions}
           />
           <Stack.Screen
+            name="Dashboard"
+            component={DashboardScreen}
+            options={headerOptions}
+          />
+          <Stack.Screen
             name="Home"
             component={HomeScreen}
+            options={headerOptions}
+          />
+          <Stack.Screen
+            name="Emocje"
+            component={SaveDayScreen}
             options={headerOptions}
           />
           <Stack.Screen

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, StatusBar } from "react-native";
 import DateChanger from "../components/DateChanger";
 import MoodSlider from "../components/MoodSlider";
 import Colors from "../constants/colors";
@@ -13,26 +13,43 @@ import { ScrollView } from "react-native-gesture-handler";
 function HomeScreen({ navigation }) {
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
   const [mood, setMood] = useState(3);
-  const [emotions, setEmotions] = useState([]);
 
   async function onSaveButtonPress() {
     await saveData(currentDate.getTime().toString(), {
       mood: mood,
-      emotions: emotions,
+      emotions: [],
     });
   }
 
   return (
     <View style={styles.screen}>
-        <Text style={styles.welcomeText}>Jak się masz?</Text>
-        <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
-        <DateChanger
-          date={currentDate}
-          mode="datetime"
-          style={styles.dateChanger}
-        />
-      <Button title="Zapisz" onPress={onSaveButtonPress} />
-      <EmotionPicker onValueChange={(v) => setEmotions(v)}/>
+      <StatusBar barStyle="light-content"/>
+      <Text style={styles.welcomeText}>Jak się masz?</Text>
+      <MoodSlider onValueChange={(moodValue) => setMood(moodValue)} />
+      <DateChanger
+        date={currentDate}
+        mode="datetime"
+        style={styles.dateChanger}
+      />
+      <Button
+        title="Dalej"
+        onPress={() =>
+          navigation.navigate("Emocje", {
+            date: currentDate.getTime(),
+            mood: mood,
+          })
+        }
+      />
+      <Button title="Zapisz" onPress={() => onSaveButtonPress()} />
+      <Button
+        title="Anuluj"
+        onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Dashboard" }],
+          })
+        }
+      />
     </View>
   );
 }
