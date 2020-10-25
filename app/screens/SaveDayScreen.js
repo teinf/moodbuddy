@@ -4,6 +4,7 @@ import Colors from "../constants/colors";
 
 import saveData from "../utils/saveData";
 import EmotionPicker from "../components/EmotionPicker";
+import ComplimentAlert from "../components/ComplimentAlert";
 
 function SaveDayScreen({ route, navigation }) {
   const date = new Date(route.params.date);
@@ -36,7 +37,8 @@ function SaveDayScreen({ route, navigation }) {
         ListFooterComponent={
           <View style={styles.buttons}>
             <Button title="Zapisz" onPress={() => {
-              onSaveButtonPress()
+              onSaveButtonPress(mood)
+              ComplimentAlert()
               navigation.reset({
                 index: 0,
                 routes: [{ name: "MoodBuddy" }],
